@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
-const API_BASE = "https://e-commerce-api-3wara.vercel.app";
+// const API_BASE = "https://e-commerce-api-3wara.vercel.app";
+const API_BASE = "https://e-commerce-api-3wara.vercel.app/orders/my?page=1&limit=1";
+
 
 export default function Orders() {
-  const { token } = useAuth();
+  const   token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNDNjYmQ0MzMwYTZjN2ZkYWZlOTc1ZiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4NDAzMjQ4OCwiZXhwIjoxNzg0NDY0NDg4fQ.FpdhzfuTILnl2EAtVCtdrkseHGLo60D_hrRnD6Ep8D0";
 
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
