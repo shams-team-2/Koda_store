@@ -16,7 +16,6 @@ body {
   color: #f3f4f6;
 }
 
-/* أي نص رمادي أو أسود في أي مكان في الموقع يبقى أبيض تلقائيًا في الدارك مود */
 .dark .text-gray-400,
 .dark .text-gray-500,
 .dark .text-gray-600,
