@@ -5,8 +5,27 @@ import Shop from "./pages/Shop";
 import Orders from "./pages/Orders";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
+import Profile from "./pages/Profile";
+import { useAuth } from "./context/AuthContext";
+import Login from "./pages/Login";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 
 export default function App() {
+  const { isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <div className="flex-1">
+          <Login />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -15,6 +34,7 @@ export default function App() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>
   );
