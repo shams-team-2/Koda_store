@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useCart } from "../context/CartContext";
+import { useStore } from "../context/StoreContext";
 
 import { FaSearch, FaShoppingCart, FaHeart } from "react-icons/fa";
 
@@ -15,6 +15,9 @@ function normalizeProduct(p) {
   return {
     id: p._id || p.id,
     name: p.name,
+    
+    _id: p._id || p.id,     
+    images: p.images,          
 
     category: p.category,
     price: p.discountPrice || p.price,
@@ -33,7 +36,8 @@ function normalizeProduct(p) {
 }
 
 export default function Shop() {
-  const { addToCart } = useCart();
+
+  const { wishlist, toggleWishlist, isInWishlist } = useStore();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -183,9 +187,10 @@ export default function Shop() {
    
 
                     <button
+                      onClick={() => toggleWishlist(p)}
                       className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white dark:bg-gray-900 shadow flex items-center justify-center hover:bg-red-50 dark:hover:bg-red-950/40 transition">
 
-                      <FaHeart className="text-red-500 text-sm" />
+                     <FaHeart className={`text-sm ${isInWishlist(p._id) ? "text-red-500" : "text-gray-300 dark:text-gray-600"}`} />
                     </button>
                     <div className="absolute top-4 left-4 flex gap-2">
                       {p.category && (

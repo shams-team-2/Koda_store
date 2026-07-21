@@ -1,9 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
-
 const StoreContext = createContext(null);
 const API_BASE = "https://e-commerce-api-3wara.vercel.app";
-
 export function StoreProvider({ children }) {
   const { token, isAuthenticated } = useAuth();
   const [cart, setCart] = useState({ items: [], itemCount: 0, subtotal: 0, total: 0 });
@@ -12,13 +10,9 @@ export function StoreProvider({ children }) {
     return saved ? JSON.parse(saved) : [];
   });
   const [cartLoading, setCartLoading] = useState(false);
-
-  // Sync wishlist to localStorage
   useEffect(() => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
-
-  // Fetch cart from backend
   const fetchCart = async () => {
     if (!token) return;
     setCartLoading(true);
@@ -41,8 +35,6 @@ export function StoreProvider({ children }) {
       setCartLoading(false);
     }
   };
-
-  // Sync cart when token changes
   useEffect(() => {
     if (isAuthenticated && token) {
       fetchCart();
@@ -50,8 +42,6 @@ export function StoreProvider({ children }) {
       setCart({ items: [], itemCount: 0, subtotal: 0, total: 0 });
     }
   }, [token, isAuthenticated]);
-
-  // Add item to cart
   const addToCart = async (product, quantity = 1) => {
     if (!token) return false;
     try {
@@ -77,8 +67,6 @@ export function StoreProvider({ children }) {
       return false;
     }
   };
-
-  // Update item quantity
   const updateCartQuantity = async (productId, quantity) => {
     if (!token) return false;
     if (quantity <= 0) {
@@ -107,8 +95,6 @@ export function StoreProvider({ children }) {
       return false;
     }
   };
-
-  // Remove item from cart
   const removeFromCart = async (productId) => {
     if (!token) return false;
     try {
@@ -132,13 +118,9 @@ export function StoreProvider({ children }) {
       return false;
     }
   };
-
-  // Clear cart state (e.g. after successful order)
   const clearCart = () => {
     setCart({ items: [], itemCount: 0, subtotal: 0, total: 0 });
   };
-
-  // Wishlist actions
   const toggleWishlist = (product) => {
     setWishlist((prev) => {
       const exists = prev.some((item) => item._id === product._id);
@@ -149,11 +131,9 @@ export function StoreProvider({ children }) {
       }
     });
   };
-
   const isInWishlist = (productId) => {
     return wishlist.some((item) => item._id === productId);
   };
-
   return (
     <StoreContext.Provider
       value={{
@@ -173,7 +153,6 @@ export function StoreProvider({ children }) {
     </StoreContext.Provider>
   );
 }
-
 export function useStore() {
   const ctx = useContext(StoreContext);
   if (!ctx) throw new Error("useStore must be used inside StoreProvider");
