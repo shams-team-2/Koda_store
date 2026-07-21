@@ -229,7 +229,7 @@
 /* ---------- Featured / product grid ---------- */
 
 .home-page .featured-section {
-  background: var(--bg-page);
+  /* background: var(--bg-page); */
 }
 
 .home-page .grid {
@@ -537,7 +537,7 @@
 /* ---------- How it works ---------- */
 
 .home-page .how-it-works {
-  background: var(--line-soft);
+  /* background: var(--line-soft); */
 }
 
 .home-page .steps-grid {
