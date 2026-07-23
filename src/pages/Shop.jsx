@@ -7,6 +7,7 @@ import { FaSearch, FaShoppingCart, FaHeart } from "react-icons/fa";
 import StarRating from "../components/StarRating.jsx";
 
 import toast from "react-hot-toast";
+import { useCart } from "../context/CartContext";
 
 const API_BASE = "https://e-commerce-api-3wara.vercel.app";
 
@@ -27,7 +28,7 @@ function normalizeProduct(p) {
 
 
     stock: p.stock,
-    // image: p.images?.[0]?.url ,
+    
 
     image: p.images?.[0]?.url,
     averageRating: p.averageRating,
@@ -48,6 +49,8 @@ export default function Shop() {
   const [maxPrice, setMaxPrice] = useState("");
   const [sortOption, setSortOption] = useState("Default");
 
+  const { addToCart } = useCart();
+  
   useEffect(() => {
     async function loadProducts() {
       try {
