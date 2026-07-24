@@ -45,7 +45,6 @@ export default function Profile() {
     <div className="max-w-3xl mx-auto px-6 py-12 space-y-6">
       <h1 className="text-2xl font-bold text-gray-900">My Profile</h1>
 
-      {/* Profile card */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-soft p-8">
         <div className="flex items-center gap-4 mb-6">
           <img

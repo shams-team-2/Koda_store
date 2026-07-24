@@ -3,20 +3,17 @@ import axiosInstance from '../api/axiosInstance.js'
 import { formatPrice, getDiscountPercent } from '../api/products.js'
 import './Home.css'
 
-// Fetches the product list from the backend.
-// Defined locally because api/products.js doesn't export this yet.
+
 async function fetchProducts() {
   const res = await axiosInstance.get('/products')
   const data = res.data
-  // Handle a few common response shapes defensively
   const products = Array.isArray(data)
     ? data
     : data.products || data.data || []
   return { products }
 }
 
-// Builds a { name, count }[] list of categories from the products array.
-// Defined locally because the project's api/products.js doesn't export this.
+
 function buildCategoryList(products) {
   const counts = {}
   for (const p of products) {
@@ -27,9 +24,7 @@ function buildCategoryList(products) {
   return Object.entries(counts).map(([name, count]) => ({ name, count }))
 }
 
-/* ============================
-   Star Rating
-============================ */
+
 function Star({ filled }) {
   return (
     <svg
@@ -60,9 +55,7 @@ function StarRating({ rating = 0, count = 0 }) {
   )
 }
 
-/* ============================
-   Product Card
-============================ */
+
 function resolveImageUrl(product) {
   const fallbackImage = 'https://placehold.co/400x400/e2e8f0/94a3b8?text=No+Image'
   if (!product) return fallbackImage
@@ -157,9 +150,7 @@ function ProductCard({ product, onAddToCart, isWishlisted = false, onToggleWishl
   )
 }
 
-/* ============================
-   Skeleton Card (loading state)
-============================ */
+
 function SkeletonCard() {
   return (
     <div className="skeleton-card">
@@ -173,9 +164,7 @@ function SkeletonCard() {
   )
 }
 
-/* ============================
-   Category Icons + Grid
-============================ */
+
 const categoryIcons = {
   fashion: (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -279,9 +268,7 @@ function CategoryGrid({ categories }) {
   )
 }
 
-/* ============================
-   Featured Products
-============================ */
+
 function FeaturedProducts({
   products,
   status,
@@ -348,7 +335,6 @@ function FeaturedProducts({
               ))}
             </div>
 
-            {/* Mobile Swipeable Snap Carousel Layout */}
             <div className="mobile-carousel">
               {displayedProducts.map((product) => (
                 <ProductCard
@@ -367,9 +353,7 @@ function FeaturedProducts({
   )
 }
 
-/* ============================
-   Hero
-============================ */
+
 function Hero() {
   return (
     <section className="hero">
@@ -407,9 +391,7 @@ function Hero() {
   )
 }
 
-/* ============================
-   How It Works
-============================ */
+
 const howItWorksSteps = [
   {
     title: 'Browse Products',
@@ -468,9 +450,6 @@ function HowItWorks() {
   )
 }
 
-/* ============================
-   Newsletter
-============================ */
 function Newsletter() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
@@ -512,14 +491,10 @@ function Newsletter() {
   )
 }
 
-/* ============================
-   HOME PAGE (default export)
-   Note: Navbar is not included here — it's rendered
-   once at the layout/App level, not per-page.
-============================ */
+
 export default function Home() {
   const [products, setProducts] = useState([])
-  const [status, setStatus] = useState('loading') // loading | success | error
+  const [status, setStatus] = useState('loading') 
   const [error, setError] = useState(null)
   const [wishlist, setWishlist] = useState([])
 

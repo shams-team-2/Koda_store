@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext(null);
-
 const API_BASE = "https://e-commerce-api-3wara.vercel.app";
 
 export function AuthProvider({ children }) {
@@ -10,13 +9,10 @@ export function AuthProvider({ children }) {
     const saved = localStorage.getItem("user");
     return saved ? JSON.parse(saved) : null;
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-
-  const [pendingRegistration, setPendingRegistration] = useState(null);
-
-  const login = async (email, password) => {
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState("");
+const [pendingRegistration, setPendingRegistration] = useState(null);
+const login = async (email, password) => {
     setLoading(true);
     setError("");
     try {
@@ -136,7 +132,6 @@ export function AuthProvider({ children }) {
         );
       }
 
-      // in case the API logs the user in directly after verification
       if (data.token) {
         localStorage.setItem("token", data.token);
         setToken(data.token);
@@ -191,7 +186,6 @@ export function AuthProvider({ children }) {
     setLoading(true);
     setError("");
     try {
-      // ملحوظة: اسم الـ endpoint ده افتراضي، لازم يتأكد من الـ Swagger docs
       const res = await fetch(`${API_BASE}/auth/reset-password`, {
         method: "POST",
         headers: {

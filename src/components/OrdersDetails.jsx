@@ -96,7 +96,6 @@ export default function OrderDetails() {
             {order.status}
           </span>
         </div>
-        {/* Progress */}
         {order.status !== "Cancelled" && order.status !== "Returned" && (
           <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 mb-8">
             <h2 className="text-3xl font-bold mb-8">Order Progress</h2>
@@ -144,7 +143,6 @@ export default function OrderDetails() {
             </div>
           </div>
         )}{" "}
-        {/* Order Items */}
         <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
           <div className="flex items-center gap-3 mb-6">
             <FiPackage className="text-indigo-600 text-2xl" />
@@ -183,10 +181,7 @@ export default function OrderDetails() {
             </div>
           ))}
         </div>
-        {/* Shipping + Payment */}
         <div className="grid lg:grid-cols-2 gap-6 mt-8">
-          {/* Shipping */}
-
           <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
             <div className="flex items-center gap-3 mb-6">
               <FiMapPin className="text-indigo-600 text-2xl" />
@@ -209,7 +204,6 @@ export default function OrderDetails() {
             </div>
           </div>
 
-          {/* Payment */}
 
           <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
             <div className="flex items-center gap-3 mb-6">
@@ -235,7 +229,6 @@ export default function OrderDetails() {
             </p>
           </div>
         </div>{" "}
-        {/* Cancel Button */}
         {(order.status === "Pending" || order.status === "Confirmed") && (
           <div className="flex justify-center mt-8">
             <button

@@ -82,8 +82,6 @@ body {
   color: #f3f4f6;
 }
 
-/* Dark-mode overrides for pages/components still using plain Tailwind gray utility classes
-   (e.g. the admin dashboard) instead of the design-system CSS variables above. */
 .dark .text-gray-400,
 .dark .text-gray-500,
 .dark .text-gray-600,
@@ -118,7 +116,6 @@ button {
   outline-offset: 2px;
 }
 
-/* ---------- Navbar (shared across every page) ---------- */
 
 .glass-header {
   position: sticky;
@@ -275,7 +272,6 @@ button {
   font-weight: 700;
 }
 
-/* Search bar styling */
 .search-pill-container {
   display: none;
   align-items: center;
@@ -333,7 +329,6 @@ button {
   color: var(--text-strong);
 }
 
-/* User Profile Badge */
 .user-btn-modern {
   display: none;
   align-items: center;

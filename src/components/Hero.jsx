@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 export default function Hero() {
   return (
     <section className="hero">
-      {/* Grid Pattern Overlay */}
       <div className="hero-grid-overlay" />
 
       <div className="wrap hero-inner" style={{ position: 'relative', zIndex: 2 }}>

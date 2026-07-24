@@ -1,13 +1,8 @@
-/* All rules in this file are scoped under .home-page so they only ever
-   affect the Home page and never leak into Shop or any other route. */
-
 .home-page .wrap {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 20px;
 }
-
-/* ---------- Hero ---------- */
 
 .home-page .hero {
   background: linear-gradient(135deg, #312e81 0%, #4338ca 50%, #4f46e5 100%);
@@ -113,7 +108,6 @@
   background: rgba(255, 255, 255, 0.12);
 }
 
-/* ---------- Section shell ---------- */
 
 .home-page .section {
   padding: 64px 0;
@@ -170,7 +164,6 @@
   text-decoration: underline;
 }
 
-/* ---------- Category grid ---------- */
 
 .home-page .category-grid {
   display: grid;
@@ -225,19 +218,11 @@
   font-size: 12.5px;
   color: var(--text-muted);
 }
-
-/* ---------- Featured / product grid ---------- */
-
-.home-page .featured-section {
-  /* background: var(--bg-page); */
-}
-
 .home-page .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
-
 .home-page .product-card {
   background: var(--bg-white);
   border: 1px solid var(--line);
@@ -461,9 +446,6 @@
   color: var(--text-faint);
   cursor: not-allowed;
 }
-
-/* ---------- States: loading / error / empty ---------- */
-
 .home-page .state-block {
   text-align: center;
   padding: 70px 20px;
@@ -534,12 +516,6 @@
   }
 }
 
-/* ---------- How it works ---------- */
-
-.home-page .how-it-works {
-  /* background: var(--line-soft); */
-}
-
 .home-page .steps-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -578,7 +554,6 @@
   margin-inline: auto;
 }
 
-/* ---------- Newsletter ---------- */
 
 .home-page .newsletter-wrap {
   padding: 0 24px 64px;
@@ -676,7 +651,6 @@
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* ---------- Footer (only applies if <Footer /> is rendered inside Home) ---------- */
 
 .home-page .footer {
   background: var(--bg-white);
@@ -756,7 +730,6 @@
   color: var(--text-faint);
 }
 
-/* ---------- Responsive ---------- */
 
 @media (max-width: 980px) {
   .home-page .category-grid {
@@ -813,7 +786,6 @@
   }
 }
 
-/* Mobile responsive carousel */
 .home-page .mobile-carousel {
   display: flex;
   overflow-x: auto;
@@ -826,7 +798,6 @@
 
 .home-page .mobile-carousel::-webkit-scrollbar {
   display: none;
-  /* Chrome/Safari */
 }
 
 .home-page .mobile-carousel>* {
