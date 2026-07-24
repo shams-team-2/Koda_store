@@ -2,7 +2,6 @@ import { useStore } from "../context/StoreContext";
 import { Link } from "react-router-dom";
 import { Heart, Trash2, ShoppingCart } from "lucide-react";
 import { formatPrice } from "../api/products.js";
-
 export default function Wishlist() {
   const { wishlist, addToCart, toggleWishlist } = useStore();
   return (

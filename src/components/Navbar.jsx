@@ -4,36 +4,25 @@ import { useTheme } from "../context/ThemeContext";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Zap, Search, Moon, Sun, Heart, ShoppingCart, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
-
 import { useCart } from "../context/CartContext";
-
-
-
-
-
 export default function Navbar() {
   const { isAuthenticated, user } = useAuth();
   const { darkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
-
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const inputRef = useRef(null);
-
   const { cartItems } = useCart();
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
   useEffect(() => {
     if (searchOpen) inputRef.current?.focus();
   }, [searchOpen]);
-
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/shop", label: "Shop" },
     { to: "/orders", label: "My Orders" },
     { to: "/wishlist", label: "Wishlist" },
   ];
-
   const goToFooter = () => {
     const footer = document.getElementById("footer");
     if (footer) {
@@ -45,7 +34,6 @@ export default function Navbar() {
       }, 300);
     }
   };
-
   const searchRoutes = [
     { keywords: ["shop", "شوب", "shopping"], action: () => navigate("/shop") },
     { keywords: ["home", "هوم"], action: () => navigate("/") },
@@ -55,7 +43,6 @@ export default function Navbar() {
     { keywords: ["wishlist", "ويش ليست"], action: () => navigate("/wishlist") },
     { keywords: ["contact", "كونتاكت"], action: () => goToFooter() },
   ];
-
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     const q = query.trim().toLowerCase();
@@ -63,30 +50,24 @@ export default function Navbar() {
       setSearchOpen(false);
       return;
     }
-
     const match = searchRoutes.find((r) =>
       r.keywords.some((k) => q.includes(k.toLowerCase()))
     );
-
     if (match) {
       match.action();
     }
-
     setQuery("");
     setSearchOpen(false);
   };
-
   return (
     <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-sm dark:border-b dark:border-gray-800">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <Zap className="text-indigo-600 dark:text-white fill-indigo-600 dark:fill-white" size={24} />
           <span className="font-extrabold text-lg tracking-tight text-gray-900 dark:text-white">
             KODA <span className="block text-[10px] font-medium -mt-1 text-gray-500 dark:text-white">STORE</span>
           </span>
         </Link>
-
         <nav className="hidden md:flex items-center gap-1 bg-gray-100 dark:bg-gray-800 rounded-full px-2 py-1">
           {navLinks.map((link) => (
             <NavLink

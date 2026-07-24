@@ -1,13 +1,8 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
-
 import { FaShoppingCart, FaTrash, FaArrowLeft, FaTag } from "react-icons/fa";
-
 import { useCart } from "../context/CartContext";
-
 import toast from "react-hot-toast";
-
 export default function Cart() {
   const { cartItems, removeFromCart, clearCart, updateQuantity } = useCart();
 

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Zap, Mail, Lock, User, Phone } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
-
 export default function Login() {
   const {
     login,
@@ -13,30 +12,17 @@ export default function Login() {
     loading,
     error,
   } = useAuth();
-
-
-
-
-
   const [view, setView] = useState("login");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
-
-
   const [otp, setOtp] = useState("");
   const [otpMode, setOtpMode] = useState("register");
   const [cooldown, setCooldown] = useState(0);
-
-
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [localError, setLocalError] = useState("");
-
   const startCooldown = () => {
     setCooldown(30);
     const timer = setInterval(() => {
@@ -49,7 +35,6 @@ export default function Login() {
       });
     }, 1000);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(email, password);

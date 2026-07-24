@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
-
 export default function Newsletter() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
-
   function handleSubmit(e) {
     e.preventDefault()
     if (!email) return
     setSubmitted(true)
     setEmail('')
   }
-
   return (
     <div className="newsletter-wrap">
       <section className="newsletter">
@@ -35,7 +32,7 @@ export default function Newsletter() {
           <button type="submit">Subscribe</button>
         </form>
 
-        {submitted && <p className="newsletter-note">Thanks — you're on the list!</p>}
+        {submitted && <p className="newsletter-note">Thanks you're on the list!</p>}
       </section>
     </div>
   )

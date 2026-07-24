@@ -1,18 +1,16 @@
 import { createContext, useContext, useState } from "react";
-
 const AuthContext = createContext(null);
 const API_BASE = "https://e-commerce-api-3wara.vercel.app";
-
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem("user");
     return saved ? JSON.parse(saved) : null;
   });
-const [loading, setLoading] = useState(false);
-const [error, setError] = useState("");
-const [pendingRegistration, setPendingRegistration] = useState(null);
-const login = async (email, password) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [pendingRegistration, setPendingRegistration] = useState(null);
+  const login = async (email, password) => {
     setLoading(true);
     setError("");
     try {
@@ -24,29 +22,22 @@ const login = async (email, password) => {
         },
         body: JSON.stringify({ email, password }),
       });
-
       const data = await res.json();
-
       if (!res.ok || !data.success) {
-        throw new Error(data.message || "فشل تسجيل الدخول");
+        throw new Error(data.message || "Login failed");
       }
-
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       setToken(data.token);
       setUser(data.user);
       return true;
     } catch (err) {
-      setError(err.message || "حدث خطأ، حاول مرة أخرى");
+      setError(err.message || "Something went wrong. Please try again.");
       return false;
     } finally {
       setLoading(false);
     }
   };
-
-
-
-  // ---------- REGISTER ----------
   const register = async ({ username, email, password, phone }) => {
     setLoading(true);
     setError("");
@@ -59,25 +50,21 @@ const login = async (email, password) => {
         },
         body: JSON.stringify({ username, email, password, phone }),
       });
-
       const data = await res.json();
-
       if (!res.ok || !data.success) {
         throw new Error(
-          data.errors?.[0] || data.message || "فشل إنشاء الحساب"
+          data.errors?.[0] || data.message || "Registration failed"
         );
       }
-
       setPendingRegistration({ username, email, password, phone });
       return true;
     } catch (err) {
-      setError(err.message || "حدث خطأ، حاول مرة أخرى");
+      setError(err.message || "Something went wrong. Please try again.");
       return false;
     } finally {
       setLoading(false);
     }
   };
-
   const resendRegisterOtp = async (email) => {
     setLoading(true);
     setError("");
@@ -86,7 +73,6 @@ const login = async (email, password) => {
         pendingRegistration?.email === email
           ? pendingRegistration
           : { email };
-
       const res = await fetch(`${API_BASE}/auth/register/send-otp`, {
         method: "POST",
         headers: {
@@ -95,22 +81,18 @@ const login = async (email, password) => {
         },
         body: JSON.stringify(payload),
       });
-
       const data = await res.json();
-
       if (!res.ok || !data.success) {
-        throw new Error(data.message || "تعذر إعادة إرسال الكود");
+        throw new Error(data.message || "Failed to resend OTP");
       }
-
       return true;
     } catch (err) {
-      setError(err.message || "حدث خطأ، حاول مرة أخرى");
+      setError(err.message || "Something went wrong. Please try again.");
       return false;
     } finally {
       setLoading(false);
     }
   };
-
   const verifyRegisterOtp = async (email, otp) => {
     setLoading(true);
     setError("");
@@ -123,15 +105,12 @@ const login = async (email, password) => {
         },
         body: JSON.stringify({ email, otp }),
       });
-
       const data = await res.json();
-
       if (!res.ok || !data.success) {
         throw new Error(
-          data.errors?.[0] || data.message || "الكود غير صحيح"
+          data.errors?.[0] || data.message || "Invalid OTP"
         );
       }
-
       if (data.token) {
         localStorage.setItem("token", data.token);
         setToken(data.token);
@@ -140,20 +119,15 @@ const login = async (email, password) => {
         localStorage.setItem("user", JSON.stringify(data.user));
         setUser(data.user);
       }
-
       setPendingRegistration(null);
       return true;
     } catch (err) {
-      setError(err.message || "حدث خطأ، حاول مرة أخرى");
+      setError(err.message || "Something went wrong. Please try again.");
       return false;
     } finally {
       setLoading(false);
     }
   };
-
-
-
-  
   const forgotPasswordSendOtp = async (email) => {
     setLoading(true);
     setError("");
@@ -166,22 +140,18 @@ const login = async (email, password) => {
         },
         body: JSON.stringify({ email }),
       });
-
       const data = await res.json();
-
       if (!res.ok || !data.success) {
-        throw new Error(data.message || "تعذر إرسال كود إعادة التعيين");
+        throw new Error(data.message || "Failed to send reset OTP");
       }
-
       return true;
     } catch (err) {
-      setError(err.message || "حدث خطأ، حاول مرة أخرى");
+      setError(err.message || "Something went wrong. Please try again.");
       return false;
     } finally {
       setLoading(false);
     }
   };
-
   const resetPassword = async (email, otp, newPassword) => {
     setLoading(true);
     setError("");
@@ -194,24 +164,20 @@ const login = async (email, password) => {
         },
         body: JSON.stringify({ email, otp, newPassword }),
       });
-
       const data = await res.json();
-
       if (!res.ok || !data.success) {
         throw new Error(
-          data.errors?.[0] || data.message || "تعذر تغيير كلمة المرور"
+          data.errors?.[0] || data.message || "Failed to reset password"
         );
       }
-
       return true;
     } catch (err) {
-      setError(err.message || "حدث خطأ، حاول مرة أخرى");
+      setError(err.message || "Something went wrong. Please try again.");
       return false;
     } finally {
       setLoading(false);
     }
   };
-
   const updateProfile = async (updates) => {
     setLoading(true);
     setError("");
@@ -225,31 +191,26 @@ const login = async (email, password) => {
         },
         body: JSON.stringify(updates),
       });
-
       const data = await res.json();
-
       if (!res.ok || !data.success) {
-        throw new Error(data.message || "فشل تحديث البيانات");
+        throw new Error(data.message || "Failed to update profile");
       }
-
       localStorage.setItem("user", JSON.stringify(data.user));
       setUser(data.user);
       return true;
     } catch (err) {
-      setError(err.message || "حدث خطأ، حاول مرة أخرى");
+      setError(err.message || "Something went wrong. Please try again.");
       return false;
     } finally {
       setLoading(false);
     }
   };
-
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setToken(null);
     setUser(null);
   };
-
   return (
     <AuthContext.Provider
       value={{
@@ -273,9 +234,10 @@ const login = async (email, password) => {
     </AuthContext.Provider>
   );
 }
-
 export function useAuth() {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used inside AuthProvider");
+  if (!ctx) {
+    throw new Error("useAuth must be used inside AuthProvider");
+  }
   return ctx;
 }
